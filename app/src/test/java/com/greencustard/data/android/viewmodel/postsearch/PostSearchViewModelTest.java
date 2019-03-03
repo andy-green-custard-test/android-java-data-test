@@ -3,7 +3,7 @@ package com.greencustard.data.android.viewmodel.postsearch;
 import com.greencustard.viewmodel.postsearch.MockPostSearchDependencies;
 import com.greencustard.viewmodel.postsearch.PostSearchViewModel;
 import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
-import com.greencustard.viewmodel.postsearch.intention.ChangeSearchTextIntention;
+import com.greencustard.viewmodel.postsearch.intention.LoadResultsIntention;
 import com.greencustard.viewmodel.postsearch.intention.SelectUserIntention;
 import com.greencustard.viewmodel.postsearch.state.DefaultPostSearchState;
 import com.greencustard.viewmodel.postsearch.state.DisplayingResultsSearchState;
@@ -35,7 +35,7 @@ public class PostSearchViewModelTest {
 
     @Test
     public void searchAll() throws InterruptedException {
-        mViewModel.submit(new ChangeSearchTextIntention(""));
+        mViewModel.submit(new LoadResultsIntention());
 
         Thread.sleep(TIMEOUT);
         DisplayingResultsSearchState state = (DisplayingResultsSearchState) mViewModel.getLatest();
@@ -44,29 +44,8 @@ public class PostSearchViewModelTest {
     }
 
     @Test
-    public void searchOne() throws InterruptedException {
-        mViewModel.submit(new ChangeSearchTextIntention("1"));
-
-        Thread.sleep(TIMEOUT);
-        DisplayingResultsSearchState state = (DisplayingResultsSearchState) mViewModel.getLatest();
-
-        assertThat(state.getResults().size(),is(1));
-        assertThat(state.getResults().get(0).getName(),is("1"));
-    }
-
-    @Test
-    public void searchNone() throws InterruptedException {
-        mViewModel.submit(new ChangeSearchTextIntention("bla bla bla"));
-
-        Thread.sleep(TIMEOUT);
-        DisplayingResultsSearchState state = (DisplayingResultsSearchState) mViewModel.getLatest();
-
-        assertThat(state.getResults().size(),is(0));
-    }
-
-    @Test
     public void selectValid() throws InterruptedException {
-        mViewModel.submit(new ChangeSearchTextIntention(""));
+        mViewModel.submit(new LoadResultsIntention());
         mViewModel.submit(new SelectUserIntention(1));
 
         Thread.sleep(TIMEOUT);
@@ -76,7 +55,7 @@ public class PostSearchViewModelTest {
     }
 
     @Test
-    public void selectWithoutSearch() throws InterruptedException {
+    public void selectWithoutLoad() throws InterruptedException {
         mViewModel.submit(new SelectUserIntention(1));
 
         Thread.sleep(TIMEOUT);
@@ -87,7 +66,7 @@ public class PostSearchViewModelTest {
 
     @Test (expected = Throwable.class)
     public void selectNonExistentResult() throws InterruptedException {
-        mViewModel.submit(new ChangeSearchTextIntention(""));
+        mViewModel.submit(new LoadResultsIntention());
         mViewModel.submit(new SelectUserIntention(666));
 
         Thread.sleep(TIMEOUT);

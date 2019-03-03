@@ -8,7 +8,7 @@ import io.reactivex.Single;
 
 public interface PostSearchDependenciesInterface {
 
-    Single<List<User>> usersByName(String name);
+    Single<List<User>> allUsers();
 
     void onSelectUser(int selectedUserId);
 

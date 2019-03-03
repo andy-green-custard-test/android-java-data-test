@@ -17,7 +17,7 @@ import com.greencustard.data.android.pojo.User;
 import com.greencustard.datatest.android.R;
 import com.greencustard.viewmodel.postsearch.PostSearchViewModel;
 import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
-import com.greencustard.viewmodel.postsearch.intention.ChangeSearchTextIntention;
+import com.greencustard.viewmodel.postsearch.intention.LoadResultsIntention;
 import com.greencustard.viewmodel.postsearch.intention.SelectUserIntention;
 
 import java.net.MalformedURLException;
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private void connectSearch() {
         mSearchDependencies = new PostSearchDependenciesInterface() {
             @Override
-            public Single<List<User>> usersByName(final String name) {
+            public Single<List<User>> allUsers() {
                 try {
                     //Would abstract this out if I had more time!
 
@@ -77,15 +77,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public List<User> apply(String body) throws Exception {
                                     List<User> unfilteredUsers = Arrays.asList(mDeserialiser.deserialise(User[].class, body));
-                                    return Observable.fromIterable(unfilteredUsers)
-                                            .filter(new Predicate<User>() {
-                                                @Override
-                                                public boolean test(User user) throws Exception {
-                                                    return user.getName().toLowerCase().contains(name.toLowerCase());
-                                                }
-                                            })
-                                            .toList()
-                                            .blockingGet();
+                                    return unfilteredUsers;
                                 }
                             });
                 } catch (MalformedURLException e) {
@@ -114,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mSearchViewModel.submit(new ChangeSearchTextIntention(editable.toString()));
+                mSearchViewModel.submit(new LoadResultsIntention());
             }
         });
         mSearchField.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

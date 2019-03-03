@@ -3,7 +3,7 @@ package com.greencustard.viewmodel.postsearch;
 import com.google.common.collect.Sets;
 import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
 import com.greencustard.viewmodel.postsearch.intention.PostSearchIntention;
-import com.greencustard.viewmodel.postsearch.mappers.ChangeSearchTextMapper;
+import com.greencustard.viewmodel.postsearch.mappers.LoadResultsMapper;
 import com.greencustard.viewmodel.postsearch.mappers.PostSearchMapper;
 import com.greencustard.viewmodel.postsearch.mappers.SelectUserMapper;
 import com.greencustard.viewmodel.postsearch.state.DefaultPostSearchState;
@@ -32,7 +32,7 @@ public class PostSearchViewModel {
 
     public PostSearchViewModel(PostSearchDependenciesInterface dependencies) {
         mDependencies = dependencies;
-        mMappers = Sets.newHashSet(new ChangeSearchTextMapper(mDependencies),new SelectUserMapper(mDependencies));
+        mMappers = Sets.newHashSet(new LoadResultsMapper(mDependencies),new SelectUserMapper(mDependencies));
         mSubject = ReplaySubject.create();
         mProcessingScheduler = Schedulers.single();
         mState = mSubject
