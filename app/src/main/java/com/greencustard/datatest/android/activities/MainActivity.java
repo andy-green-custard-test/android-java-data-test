@@ -58,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         connectSearch();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSearchViewModel.submit(new LoadResultsIntention());
+    }
+
     private void findViews() {
         mSearchField = findViewById(R.id.activity_main_usersearchfield);
         mResultTable = findViewById(R.id.activity_main_postresulttable);
@@ -69,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
             public Single<List<User>> allUsers() {
                 try {
                     //Would abstract this out if I had more time!
-
-                    //Would cache rather than hit REST needlessly on every keystroke ... if I had time
 
                     return mRestClient.getUrl(new URL(RestConfig.USER_URL_STRING))
                             .map(new Function<String, List<User>>() {
@@ -93,22 +97,6 @@ public class MainActivity extends AppCompatActivity {
         mSearchViewModel = new PostSearchViewModel(mSearchDependencies);
 
         mSearchField.setAdapter(new UserAutocompleteAdapter(this,mSearchViewModel));
-        mSearchField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                mSearchViewModel.submit(new LoadResultsIntention());
-            }
-        });
         mSearchField.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
