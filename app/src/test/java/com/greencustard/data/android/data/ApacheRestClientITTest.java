@@ -1,4 +1,4 @@
-package com.greencustard.datadata.android.data;
+package com.greencustard.data.android.data;
 
 import org.junit.Before;
 import org.junit.Ignore;

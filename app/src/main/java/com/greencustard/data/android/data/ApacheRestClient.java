@@ -1,4 +1,4 @@
-package com.greencustard.datadata.android.data;
+package com.greencustard.data.android.data;
 
 import org.apache.commons.io.IOUtils;
 
@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 
 import io.reactivex.Single;
 import io.reactivex.subjects.SingleSubject;

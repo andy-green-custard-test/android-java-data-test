@@ -1,9 +1,7 @@
-package com.greencustard.datadata.android.data;
+package com.greencustard.data.android.data;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Before;
 import org.junit.Test;
 
