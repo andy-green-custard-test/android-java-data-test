@@ -1,12 +1,12 @@
 package com.greencustard.data.android.viewmodel.postsearch;
 
-import com.greencustard.viewmodel.postsearch.MockPostSearchDependencies;
-import com.greencustard.viewmodel.postsearch.PostSearchViewModel;
-import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
-import com.greencustard.viewmodel.postsearch.intention.LoadResultsIntention;
-import com.greencustard.viewmodel.postsearch.intention.SelectUserIntention;
-import com.greencustard.viewmodel.postsearch.state.DefaultPostSearchState;
-import com.greencustard.viewmodel.postsearch.state.DisplayingResultsSearchState;
+import com.greencustard.viewmodel.usersearch.MockPostSearchDependencies;
+import com.greencustard.viewmodel.usersearch.UserSearchViewModel;
+import com.greencustard.viewmodel.usersearch.dependencies.UserSearchDependencies;
+import com.greencustard.viewmodel.usersearch.intention.LoadResultsIntention;
+import com.greencustard.viewmodel.usersearch.intention.SelectUserIntention;
+import com.greencustard.viewmodel.usersearch.state.DefaultUserSearchState;
+import com.greencustard.viewmodel.usersearch.state.DisplayingResultsSearchState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,18 +19,18 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-public class PostSearchViewModelTest {
+public class UserSearchViewModelTest {
 
     //With more time, would use a more appropriate way to check results
     private static final long TIMEOUT = 500;
 
-    private PostSearchDependenciesInterface mDependencies;
-    private PostSearchViewModel mViewModel;
+    private UserSearchDependencies mDependencies;
+    private UserSearchViewModel mViewModel;
 
     @Before
     public void setUp() {
         mDependencies = spy(new MockPostSearchDependencies());
-        mViewModel = new PostSearchViewModel(mDependencies);
+        mViewModel = new UserSearchViewModel(mDependencies);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class PostSearchViewModelTest {
         mViewModel.submit(new SelectUserIntention(1));
 
         Thread.sleep(TIMEOUT);
-        DefaultPostSearchState state = (DefaultPostSearchState) mViewModel.getLatest();
+        DefaultUserSearchState state = (DefaultUserSearchState) mViewModel.getLatest();
         assertThat(state.getSelectedUserId().get(),is(1));
         verify(mDependencies).onSelectUser(eq(1));
     }
@@ -59,7 +59,7 @@ public class PostSearchViewModelTest {
         mViewModel.submit(new SelectUserIntention(1));
 
         Thread.sleep(TIMEOUT);
-        DefaultPostSearchState state = (DefaultPostSearchState) mViewModel.getLatest();
+        DefaultUserSearchState state = (DefaultUserSearchState) mViewModel.getLatest();
         assertThat(state.getSelectedUserId().isPresent(),is(false));
         verify(mDependencies,never()).onSelectUser(any(Integer.class));
     }
@@ -70,7 +70,7 @@ public class PostSearchViewModelTest {
         mViewModel.submit(new SelectUserIntention(666));
 
         Thread.sleep(TIMEOUT);
-        DefaultPostSearchState state = (DefaultPostSearchState) mViewModel.getLatest();
+        DefaultUserSearchState state = (DefaultUserSearchState) mViewModel.getLatest();
         assertThat(state.getSelectedUserId().isPresent(),is(false));
         verify(mDependencies,never()).onSelectUser(any(Integer.class));
     }

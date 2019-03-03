@@ -38,4 +38,9 @@ public class User {
     public String getEmail() {
         return mEmail;
     }
+
+    @Override
+    public String toString() {
+        return getName(); //Cludge for AutocompleteTextView - should do this properly using a Filter
+    }
 }

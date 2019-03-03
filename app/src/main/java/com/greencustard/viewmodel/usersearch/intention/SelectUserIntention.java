@@ -1,6 +1,6 @@
-package com.greencustard.viewmodel.postsearch.intention;
+package com.greencustard.viewmodel.usersearch.intention;
 
-public class SelectUserIntention implements PostSearchIntention {
+public class SelectUserIntention implements UserSearchIntention {
 
     private final int mId;
 

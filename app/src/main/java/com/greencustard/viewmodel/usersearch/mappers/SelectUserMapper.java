@@ -1,12 +1,12 @@
-package com.greencustard.viewmodel.postsearch.mappers;
+package com.greencustard.viewmodel.usersearch.mappers;
 
 import com.greencustard.data.android.pojo.User;
-import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
-import com.greencustard.viewmodel.postsearch.intention.PostSearchIntention;
-import com.greencustard.viewmodel.postsearch.intention.SelectUserIntention;
-import com.greencustard.viewmodel.postsearch.state.DefaultPostSearchState;
-import com.greencustard.viewmodel.postsearch.state.DisplayingResultsSearchState;
-import com.greencustard.viewmodel.postsearch.state.PostSearchState;
+import com.greencustard.viewmodel.usersearch.dependencies.UserSearchDependencies;
+import com.greencustard.viewmodel.usersearch.intention.SelectUserIntention;
+import com.greencustard.viewmodel.usersearch.intention.UserSearchIntention;
+import com.greencustard.viewmodel.usersearch.state.DefaultUserSearchState;
+import com.greencustard.viewmodel.usersearch.state.DisplayingResultsSearchState;
+import com.greencustard.viewmodel.usersearch.state.UserSearchState;
 
 import java.util.Optional;
 
@@ -14,19 +14,19 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Predicate;
 
-public class SelectUserMapper extends PostSearchMapper {
+public class SelectUserMapper extends UserSearchMapper {
 
-    public SelectUserMapper(PostSearchDependenciesInterface mDependencies) {
+    public SelectUserMapper(UserSearchDependencies mDependencies) {
         super(mDependencies);
     }
 
     @Override
-    public boolean supports(PostSearchIntention intention) {
+    public boolean supports(UserSearchIntention intention) {
         return intention instanceof SelectUserIntention;
     }
 
     @Override
-    public Single<PostSearchState> map(PostSearchState state, PostSearchIntention intention) {
+    public Single<UserSearchState> map(UserSearchState state, UserSearchIntention intention) {
 
         final int selectedId = ((SelectUserIntention)intention).getId();
 
@@ -48,6 +48,6 @@ public class SelectUserMapper extends PostSearchMapper {
 
         mDependencies.onSelectUser(selectedId);
 
-        return Single.<PostSearchState>just(new DefaultPostSearchState(Optional.of(selectedId)));
+        return Single.<UserSearchState>just(new DisplayingResultsSearchState(Optional.of(selectedId),((DisplayingResultsSearchState) state).getResults()));
     }
 }

@@ -1,15 +1,13 @@
 package com.greencustard.viewmodel.postsearch;
 
 import com.google.common.collect.Sets;
-import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
+import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependencies;
 import com.greencustard.viewmodel.postsearch.intention.PostSearchIntention;
-import com.greencustard.viewmodel.postsearch.mappers.LoadResultsMapper;
-import com.greencustard.viewmodel.postsearch.mappers.PostSearchMapper;
-import com.greencustard.viewmodel.postsearch.mappers.SelectUserMapper;
+import com.greencustard.viewmodel.postsearch.mapper.PostSearchMapper;
+import com.greencustard.viewmodel.postsearch.mapper.SetUserMapper;
 import com.greencustard.viewmodel.postsearch.state.DefaultPostSearchState;
 import com.greencustard.viewmodel.postsearch.state.PostSearchState;
 
-import java.util.Optional;
 import java.util.Set;
 
 import io.reactivex.Observable;
@@ -22,7 +20,7 @@ import io.reactivex.subjects.ReplaySubject;
 
 public class PostSearchViewModel {
 
-    private final PostSearchDependenciesInterface mDependencies;
+    private final PostSearchDependencies mDependencies;
     private final Set<PostSearchMapper> mMappers;
     private final ReplaySubject<PostSearchIntention> mSubject;
     private final Scheduler mProcessingScheduler;
@@ -30,27 +28,27 @@ public class PostSearchViewModel {
     private PostSearchState mLatest;
 
 
-    public PostSearchViewModel(PostSearchDependenciesInterface dependencies) {
+    public PostSearchViewModel(PostSearchDependencies dependencies) {
         mDependencies = dependencies;
-        mMappers = Sets.newHashSet(new LoadResultsMapper(mDependencies),new SelectUserMapper(mDependencies));
+        mMappers = Sets.<PostSearchMapper>newHashSet(new SetUserMapper(dependencies));
         mSubject = ReplaySubject.create();
         mProcessingScheduler = Schedulers.single();
         mState = mSubject
                 .observeOn(mProcessingScheduler)
                 .scan(
-                new DefaultPostSearchState(Optional.<Integer>empty()),
-                new BiFunction<PostSearchState, PostSearchIntention, PostSearchState>() {
-                    @Override
-                    public PostSearchState apply(PostSearchState previous, PostSearchIntention intention) throws Exception {
-                        PostSearchMapper mapper = mapperFor(intention);
-                        return mapper.map(previous,intention).blockingGet();
-                    }
-                }
-        );
+                        new DefaultPostSearchState(),
+                        new BiFunction<PostSearchState, PostSearchIntention, PostSearchState>() {
+                            @Override
+                            public PostSearchState apply(PostSearchState previous, PostSearchIntention intention) throws Exception {
+                                PostSearchMapper mapper = mapperFor(intention);
+                                return mapper.map(previous,intention).blockingGet();
+                            }
+                        }
+                );
         mState.subscribe(new Consumer<PostSearchState>() {
             @Override
-            public void accept(PostSearchState postSearchState) throws Exception {
-                mLatest = postSearchState;
+            public void accept(PostSearchState userSearchState) throws Exception {
+                mLatest = userSearchState;
             }
         });
     }
@@ -87,4 +85,5 @@ public class PostSearchViewModel {
         mProcessingScheduler.shutdown();
         super.finalize();
     }
+
 }
