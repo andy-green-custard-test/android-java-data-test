@@ -1,4 +1,4 @@
-package com.greencustard.data.android.viewmodel.postsearch;
+package com.greencustard.viewmodel.postsearch;
 
 import com.google.common.collect.Lists;
 import com.greencustard.data.android.pojo.User;
@@ -7,7 +7,7 @@ import java.util.List;
 
 import io.reactivex.Single;
 
-class MockPostSearchDependencies implements com.greencustard.data.android.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface {
+class MockPostSearchDependencies implements com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface {
 
     private User mUser1 = new User(1,"1","1","1","1","1");
     private User mUser2 = new User(2,"2","2","2","2","2");

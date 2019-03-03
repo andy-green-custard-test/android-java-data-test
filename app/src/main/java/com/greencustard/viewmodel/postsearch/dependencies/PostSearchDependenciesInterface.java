@@ -1,4 +1,4 @@
-package com.greencustard.data.android.viewmodel.postsearch.dependencies;
+package com.greencustard.viewmodel.postsearch.dependencies;
 
 import com.greencustard.data.android.pojo.User;
 

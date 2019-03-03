@@ -1,16 +1,13 @@
-package com.greencustard.data.android.viewmodel.postsearch.mappers;
-
-import android.icu.text.RelativeDateTimeFormatter;
+package com.greencustard.viewmodel.postsearch.mappers;
 
 import com.greencustard.data.android.pojo.User;
-import com.greencustard.data.android.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
-import com.greencustard.data.android.viewmodel.postsearch.intention.PostSearchIntention;
-import com.greencustard.data.android.viewmodel.postsearch.intention.SelectUserIntention;
-import com.greencustard.data.android.viewmodel.postsearch.state.DefaultPostSearchState;
-import com.greencustard.data.android.viewmodel.postsearch.state.DisplayingResultsSearchState;
-import com.greencustard.data.android.viewmodel.postsearch.state.PostSearchState;
+import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
+import com.greencustard.viewmodel.postsearch.intention.PostSearchIntention;
+import com.greencustard.viewmodel.postsearch.intention.SelectUserIntention;
+import com.greencustard.viewmodel.postsearch.state.DefaultPostSearchState;
+import com.greencustard.viewmodel.postsearch.state.DisplayingResultsSearchState;
+import com.greencustard.viewmodel.postsearch.state.PostSearchState;
 
-import java.util.List;
 import java.util.Optional;
 
 import io.reactivex.Observable;

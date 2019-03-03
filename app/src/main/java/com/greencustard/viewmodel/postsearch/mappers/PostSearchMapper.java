@@ -1,8 +1,8 @@
-package com.greencustard.data.android.viewmodel.postsearch.mappers;
+package com.greencustard.viewmodel.postsearch.mappers;
 
-import com.greencustard.data.android.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
-import com.greencustard.data.android.viewmodel.postsearch.intention.PostSearchIntention;
-import com.greencustard.data.android.viewmodel.postsearch.state.PostSearchState;
+import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
+import com.greencustard.viewmodel.postsearch.intention.PostSearchIntention;
+import com.greencustard.viewmodel.postsearch.state.PostSearchState;
 
 import io.reactivex.Single;
 

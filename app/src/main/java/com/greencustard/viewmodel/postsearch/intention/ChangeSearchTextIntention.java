@@ -1,4 +1,4 @@
-package com.greencustard.data.android.viewmodel.postsearch.intention;
+package com.greencustard.viewmodel.postsearch.intention;
 
 public class ChangeSearchTextIntention implements PostSearchIntention {
 

@@ -1,13 +1,13 @@
-package com.greencustard.data.android.viewmodel.postsearch;
+package com.greencustard.viewmodel.postsearch;
 
 import com.google.common.collect.Sets;
-import com.greencustard.data.android.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
-import com.greencustard.data.android.viewmodel.postsearch.intention.PostSearchIntention;
-import com.greencustard.data.android.viewmodel.postsearch.mappers.ChangeSearchTextMapper;
-import com.greencustard.data.android.viewmodel.postsearch.mappers.PostSearchMapper;
-import com.greencustard.data.android.viewmodel.postsearch.mappers.SelectUserMapper;
-import com.greencustard.data.android.viewmodel.postsearch.state.DefaultPostSearchState;
-import com.greencustard.data.android.viewmodel.postsearch.state.PostSearchState;
+import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
+import com.greencustard.viewmodel.postsearch.intention.PostSearchIntention;
+import com.greencustard.viewmodel.postsearch.mappers.ChangeSearchTextMapper;
+import com.greencustard.viewmodel.postsearch.mappers.PostSearchMapper;
+import com.greencustard.viewmodel.postsearch.mappers.SelectUserMapper;
+import com.greencustard.viewmodel.postsearch.state.DefaultPostSearchState;
+import com.greencustard.viewmodel.postsearch.state.PostSearchState;
 
 import java.util.Optional;
 import java.util.Set;

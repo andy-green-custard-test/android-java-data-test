@@ -1,16 +1,15 @@
 package com.greencustard.data.android.viewmodel.postsearch;
 
-import com.greencustard.data.android.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
-import com.greencustard.data.android.viewmodel.postsearch.intention.ChangeSearchTextIntention;
-import com.greencustard.data.android.viewmodel.postsearch.intention.SelectUserIntention;
-import com.greencustard.data.android.viewmodel.postsearch.state.DefaultPostSearchState;
-import com.greencustard.data.android.viewmodel.postsearch.state.DisplayingResultsSearchState;
-import com.greencustard.data.android.viewmodel.postsearch.state.PostSearchState;
+import com.greencustard.viewmodel.postsearch.MockPostSearchDependencies;
+import com.greencustard.viewmodel.postsearch.PostSearchViewModel;
+import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
+import com.greencustard.viewmodel.postsearch.intention.ChangeSearchTextIntention;
+import com.greencustard.viewmodel.postsearch.intention.SelectUserIntention;
+import com.greencustard.viewmodel.postsearch.state.DefaultPostSearchState;
+import com.greencustard.viewmodel.postsearch.state.DisplayingResultsSearchState;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import io.reactivex.exceptions.OnErrorNotImplementedException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

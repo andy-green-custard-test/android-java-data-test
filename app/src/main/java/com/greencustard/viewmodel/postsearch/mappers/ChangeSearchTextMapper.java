@@ -1,19 +1,17 @@
-package com.greencustard.data.android.viewmodel.postsearch.mappers;
+package com.greencustard.viewmodel.postsearch.mappers;
 
 import com.greencustard.data.android.pojo.User;
-import com.greencustard.data.android.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
-import com.greencustard.data.android.viewmodel.postsearch.intention.ChangeSearchTextIntention;
-import com.greencustard.data.android.viewmodel.postsearch.intention.PostSearchIntention;
-import com.greencustard.data.android.viewmodel.postsearch.state.DefaultPostSearchState;
-import com.greencustard.data.android.viewmodel.postsearch.state.DisplayingResultsSearchState;
-import com.greencustard.data.android.viewmodel.postsearch.state.PostSearchState;
+import com.greencustard.viewmodel.postsearch.dependencies.PostSearchDependenciesInterface;
+import com.greencustard.viewmodel.postsearch.intention.ChangeSearchTextIntention;
+import com.greencustard.viewmodel.postsearch.intention.PostSearchIntention;
+import com.greencustard.viewmodel.postsearch.state.DisplayingResultsSearchState;
+import com.greencustard.viewmodel.postsearch.state.PostSearchState;
 
 import java.util.List;
 import java.util.Optional;
 
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
-import io.reactivex.subjects.ReplaySubject;
 
 public class ChangeSearchTextMapper extends PostSearchMapper {
     public ChangeSearchTextMapper(PostSearchDependenciesInterface mDependencies) {
